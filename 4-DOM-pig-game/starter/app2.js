@@ -10,7 +10,7 @@ GAME RULES:
 */
 var WIN_SCORE = 100;
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, prevDice;
 var diceDom;
 
 init();
@@ -21,13 +21,17 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         diceDom.style.display = 'block';
         diceDom.src = 'dice-' + dice + '.png';
 
-        var currScoreActivePlayer = document.querySelector('#current-' + activePlayer);
+        var currScore = document.querySelector('#current-' + activePlayer);
+        var totalScore = document.getElementById('score-' + activePlayer)
 
         if (dice !== 1) {
+            if (dice === 6 && prevDice === 6) {
+
+            }
             roundScore += dice;
-            currScoreActivePlayer.textContent = roundScore;
+            currScore.textContent = roundScore;
         } else {
-            currScoreActivePlayer.textContent = '0';
+            currScore.textContent = '0';
             switchPlayer();
         }
     }
@@ -55,7 +59,7 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 document.querySelector('.btn-new').addEventListener('click', init);
 
 function switchPlayer() {
-    var nextPlayer = 1 - activePlayer;
+    var nextPlayer = 1 ^ activePlayer;
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
     document.querySelector('.player-' + nextPlayer + '-panel').classList.add('active');
     activePlayer = nextPlayer;
@@ -70,6 +74,7 @@ function init() {
     scores = [0, 0];
     roundScore = 0;
     activePlayer = 0;
+    prevDice = 0;
     gamePlaying = true;
 
     diceDom = document.querySelector('.dice');

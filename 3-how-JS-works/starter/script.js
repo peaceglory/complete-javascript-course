@@ -1,12 +1,42 @@
 ///////////////////////////////////////
 // Lecture: Hoisting
 
+var person ={
+    name: 'miro',
+    doThis: function () {
+        console.log(this);
 
+        var doThisVar = this;
 
+        doThat();
 
+        function doThat() {
+            console.log(this);
+            if (doThisVar === this) {
+                console.log('doThisVar === doThatVar')
+            } else {
+                console.log('doThisVar !== doThatVar')
+            }
+        }
+    }
+}
 
+var person2 = {
+    name: 'Haho'
+}
 
+person2.doThis = person.doThis;
 
+function getPerson(person) {
+    console.log(this);
+    person.doThis();
+}
+
+person2.doThis();
+
+getPerson(person2);
+
+console.log('haha');
 
 
 
