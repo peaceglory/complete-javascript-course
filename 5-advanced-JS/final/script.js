@@ -266,6 +266,7 @@ john.presentation.call(emily, 'friendly', 'afternoon');
 
 //john.presentation.apply(emily, ['friendly', 'afternoon']);
 
+// function currying
 var johnFriendly = john.presentation.bind(john, 'friendly');
 
 johnFriendly('morning');
