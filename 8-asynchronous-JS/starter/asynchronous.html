@@ -7,9 +7,119 @@
     <title>Asynchronous JavaScript</title>
 </head>
 <body>
-    <h1>Asynchronous JavaScript</h1>
-    <script>
-        
-    </script>
+<h1>Asynchronous JavaScript</h1>
+<script>
+    // function getRecipe() {
+    //     setTimeout((recipeIds) => {
+    //         console.log(recipeIds);
+    //
+    //         setTimeout(id => {
+    //             const recipe = {title: "fresh pasta", publisher: "Tasty org"};
+    //             console.log(`${id}: ${recipe.title}`);
+    //             console.log('END setTimeout2');
+    //
+    //             setTimeout(publisher => {
+    //                 const recipe = {title: "pizza", publisher: "Tasty org"};
+    //                 console.log(`${publisher}: ${recipe.title}`);
+    //             }, 1000, recipe.publisher);
+    //         }, 1000, recipeIds[2]);
+    //
+    //         console.log('END setTimeout1');
+    //     }, 2000, [12, 54, 55, 154]);
+    //     console.log('END getRecipe');
+    // }
+    //
+    // getRecipe();
+    //
+    // function some() {
+    //     console.log('some');
+    // }
+    //
+    // some();
+
+    // const getIds = new Promise(function(resolve, reject)  {
+    //     console.log('getIds promise ' + this);
+    //     setTimeout((recipeIds) => {
+    //         resolve(recipeIds);
+    //     }, 2000, [12, 54, 55, 154]);
+    // });
+    //
+    // const getRecipe = recId => {
+    //     return new Promise((resolve, reject) => {
+    //         console.log('getRecipe promise ' + this);
+    //         setTimeout((id) => {
+    //             const recipe = {title: "fresh pasta", publisher: "Tasty org"};
+    //             resolve(recipe);
+    //         }, 1500, recId)
+    //     });
+    // };
+    //
+    // const getRelated = publisher => {
+    //     return new Promise((resolve, reject) => {
+    //         console.log('getRelated promise '  + this);
+    //         setTimeout(pub => {
+    //             const recipe = {title: "pizza", publisher: "Tasty org"};
+    //             resolve(`${pub}: ${recipe.title}`);
+    //         }, 1500, publisher);
+    //     });
+    // }
+
+    // getIds.then(ids => {
+    //     console.log(ids);
+    //     return getRecipe(ids[2]);
+    // })
+    //     .then(recipe => {
+    //         console.log(`${recipe.publisher}: ${recipe.title}`);
+    //         return getRelated(recipe.publisher);
+    //     })
+    //     .then(pub => {
+    //         console.log(pub);
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     });
+
+    // async function getRecipies() {
+    //     const ids = await getIds;
+    //     console.log(ids);
+    //     const recipe = await getRecipe(ids[2]);
+    //     console.log(`${recipe.publisher}: ${recipe.title}`);
+    //     const related = await getRelated(recipe.publisher);
+    //     console.log(related);
+    //
+    //     return [recipe, related]; // actually returns a Promise which is resolved with 'recipe'
+    // }
+    //
+    // getRecipies().then(([recipe, related]) => {
+    //     console.log(`${recipe.title} is the best ever!`);
+    //     console.log(`${related} is the best ever!`);
+    // });
+
+    function getWeather(woeid) {
+        fetch(`http://localhost:8080/api/weather/${woeid}`)
+            .then(result => result.json())
+            .then(json => {
+                const today = json.consolidated_weather[0];
+                console.log(`Today the weather in ${json.title} is between ${today.min_temp.toFixed(2)} and ${today.max_temp.toFixed(2)}`);
+            })
+            .catch(reason => console.log(reason));
+    }
+
+    // async function getWeather(woeid) {
+    //     const result = await fetch(`http://localhost:8080/api/weather/${woeid}`);
+    //     const json = await result.json();
+    //
+    //     const today = json.consolidated_weather[0];
+    //     console.log(`Today the weather in ${json.title} is between ${today.min_temp.toFixed(2)}`
+    //                 + ` and ${today.max_temp.toFixed(2)}`);
+    // }
+
+    getWeather('839722');
+    getWeather('44418');
+
+    console.log('end file');
+
+
+</script>
 </body>
 </html>

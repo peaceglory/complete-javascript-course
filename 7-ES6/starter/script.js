@@ -121,7 +121,7 @@
             this.numberOfTrees = numberOfTrees;
         }
 
-        getTreeDensity() {
+        treeDensity() {
             return (this.numberOfTrees / this.area).toFixed(2);
         }
 
