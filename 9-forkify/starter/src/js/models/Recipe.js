@@ -2,7 +2,6 @@ import axios from 'axios';
 import {test} from '../config';
 
 export default class Recipe {
-
     constructor(id) {
         this.id = id;
         console.log(test);

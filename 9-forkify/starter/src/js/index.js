@@ -1,9 +1,12 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
+import List from './models/List';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
+import * as listView from './views/listView';
 import { elements, elementStrings, renderLoader, clearLoader } from "./views/base";
 // import createRecipe from "./models/RecipeFunc";
+import uniqid from 'uniqid';
 
 // global state of the app
 const state = {}
@@ -108,3 +111,32 @@ elements.recipe.addEventListener('click', e => {
         controlLike();
     }
 });
+
+const controlList = () => {
+    if (!state.list) {
+        state.list = new List(uniqid);
+    }
+    state.recipe.ingredients.forEach(ing => {
+        const item = state.list.addItem(ing.count, ing.unit, ing.ingredient);
+        listView.renderItem(item);
+    });
+};
+
+elements.shopping.addEventListener('click', event => {
+   const id = event.target.closest('.shopping__item').dataset.itemid;
+
+    if (event.target.matches('.shopping__delete, .shopping__delete *')) {
+        state.list.deleteItem(id);
+        listView.deleteItem(id);
+    } else if (event.target.matches('.shopping__count-value')) {
+        const val = parseFloat(event.target.value);
+        state.list.updateCount(id, val);
+    }
+});
+
+const controlLike = () => {
+
+};
+
+//TEST
+window.st = state;
