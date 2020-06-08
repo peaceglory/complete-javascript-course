@@ -1,5 +1,3 @@
-import uniqid from 'uniqid';
-
 export default class List {
     constructor(idGen) {
         this.items = [];
