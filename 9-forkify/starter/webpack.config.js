@@ -13,8 +13,8 @@ module.exports = {
     devtool: 'inline-source-map',
     plugins: [
         new HtmlWebPlugin({
-            filename: 'index.html',
-            template: './src/index.html'
+            filename: 'index1.html',
+            template: './src/index1.html'
         })
     ]/*,
     module: {

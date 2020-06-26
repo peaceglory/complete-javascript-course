@@ -1,0 +1,23 @@
+section h1 {
+    color: green;
+}
+
+.other-titles {
+    color: #FF5049;
+}
+
+.details:nth-child(2) {
+    color: #67b26f;
+}
+
+.summary {
+    color: blue;
+}
+
+.no-style + ul { /* Select peer below */
+    list-style: none;
+}
+
+#youtube-link {
+    color: red;
+}
